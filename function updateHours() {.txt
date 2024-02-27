@@ -1,0 +1,23 @@
+function updateHours() {
+    var remainingHours = 384000; // Initial remaining hours
+    var displayElement = document.getElementById("hours");
+
+    function updateTime() {
+        remainingHours--;
+        if (remainingHours < 0) {
+            clearInterval(intervalId);
+            displayElement.textContent = "Time's up!";
+        } else {
+            var hours = Math.floor(remainingHours / 3600);
+            var minutes = Math.floor((remainingHours % 3600) / 60);
+            var seconds = remainingHours % 60;
+            displayElement.textContent = hours + " hours " + minutes + " minutes " + seconds + " seconds";
+        }
+    }
+
+    updateTime(); // Initial call to display remaining time immediately
+
+    var intervalId = setInterval(updateTime, 1000); // Update time every second
+}
+
+updateHours(); // Call the function to start updating hours
